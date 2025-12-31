@@ -34,8 +34,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     const addMutation = useMutation({
         mutationFn: addToCart,
-        onSuccess: (data) => {
-            queryClient.setQueryData(["cart", token], data);
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({ queryKey: ["cart", token] });
             toast.success("Item added to cart");
         }
     });

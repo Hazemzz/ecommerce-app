@@ -34,7 +34,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
         }
     }, [refetch, token]);
 
-    const addMutation = useMutation({
+    const { mutate: addItem } = useMutation({
         mutationFn: addToWishlist,
         onSuccess: (data) => {
             queryClient.setQueryData(["wishlist", token], data);
@@ -42,7 +42,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
         }
     });
 
-    const removeMutation = useMutation({
+    const { mutate: removeItem } = useMutation({
         mutationFn: removeFromWishlist,
         onSuccess: (data) => {
             queryClient.setQueryData(["wishlist", token], data);
@@ -54,10 +54,10 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
         () => ({
             wishlist,
             isLoading,
-            add: (productId: string) => addMutation.mutate(productId),
-            remove: (productId: string) => removeMutation.mutate(productId)
+            add: (productId: string) => addItem(productId),
+            remove: (productId: string) => removeItem(productId)
         }),
-        [addMutation, isLoading, removeMutation, token, wishlist]
+        [addItem, isLoading, removeItem, wishlist]
     );
 
     return <WishlistContext.Provider value={value}>{children}</WishlistContext.Provider>;

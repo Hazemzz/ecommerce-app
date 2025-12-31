@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    color-scheme: light;
+}
+
+body {
+    @apply bg-white text-ink antialiased font-body;
+}
+
+.container-responsive {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+.card-surface {
+    @apply bg-white shadow-card rounded-xl border border-slate-100;
+}
+
+.section-title {
+    @apply text-2xl font-semibold text-ink tracking-tight;
+}
